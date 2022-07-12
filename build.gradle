@@ -1,0 +1,46 @@
+/* We'll use the standard Java project layout expected by Gradle,
+ * https://docs.gradle.org/current/userguide/java_plugin.html#sec:java_project_layout
+ */
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitPlatformVersion = '1.8.2'
+    junitJupiterVersion = '5.8.2'
+    jqwikVersion = '1.6.3'
+    assertJVersion = '3.12.2'
+}
+
+compileJava {
+    options.compilerArgs << '-Xlint:unchecked'
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'jqwik'
+        includeEngines 'junit-jupiter'
+        // includeEngines 'junit-vintage'
+
+        include '**/*Properties.class'
+        include '**/*Test.class'
+        include '**/*Tests.class'
+    }
+}
+
+dependencies {
+    // aggregate jqwik dependency
+    testImplementation "net.jqwik:jqwik:${jqwikVersion}"
+
+    // engine and assertions for Junit5-based tests
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter:${junitJupiterVersion}"
+
+    // adding AssertJ library (fluent interface)
+    testImplementation "org.assertj:assertj-core:${assertJVersion}"
+
+}
