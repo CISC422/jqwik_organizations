@@ -9,8 +9,8 @@ public class Person implements Comparable<Person> {
     public final String firstName;
     public final String lastName;
     public int age;
-    public LocalDate birthday = null;
-    public Email emailAddress = null;
+    public LocalDate birthday;
+    public Email emailAddress;
     public Person parent = null;
 
     public Person(String fName, String lName, LocalDate dob, Email email) {
