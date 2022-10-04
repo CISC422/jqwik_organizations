@@ -1,4 +1,4 @@
 * text=auto
-*.als text
+*.java text
 *.md text
 *.jpg -text
